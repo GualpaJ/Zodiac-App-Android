@@ -3,7 +3,7 @@ package com.javier.zodiac_app
 class Horoscope(
     val id: String,
     val name: Int,
-    val date: Int,
+    val dates: Int,
     val image: Int
 
 
