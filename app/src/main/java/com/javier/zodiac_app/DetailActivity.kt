@@ -1,13 +1,17 @@
 package com.javier.zodiac_app
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+
 
 class DetailActivity : AppCompatActivity() {
 
@@ -38,5 +42,50 @@ class DetailActivity : AppCompatActivity() {
         nameTextView.text = getString(horoscope.name)
         imageView.setImageResource(horoscope.image)
         descTextView.text = getString(horoscope.desc)
+
+        supportActionBar?.setTitle(horoscope.name)
+        supportActionBar?.setSubtitle(horoscope.dates)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+//        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_favorite_selected) ESTO ES PARA UN ICONO PERSONALIZADO
+    }
+
+    // decimos cual es el menu bar que queremos cargar en el action bar
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.activity_detail, menu)
+        return true
+    }
+
+    // Que hacemos cuando se pulse una opcion del menu
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        return when (item.itemId) {
+            android.R.id.home->{
+                // Esto cierra una activity
+                finish()
+                true
+            }
+            R.id.menu_favorite -> {
+                // Marcar el horoscopo como favorito
+                Log.i("ZODIAC", "Menu favorite")
+                true
+            }
+            R.id.menu_share -> {
+                // Compartir el horoscopo
+                Log.i("ZODIAC", "Menu compartido")
+                share()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    fun share(){
+        val sendIntent = Intent()
+        sendIntent.setAction(Intent.ACTION_SEND)
+        sendIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send.")
+        sendIntent.setType("text/plain")
+
+        val shareIntent = Intent.createChooser(sendIntent, null)
+        startActivity(shareIntent)
     }
 }

@@ -3,8 +3,10 @@ package com.javier.zodiac_app
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -38,5 +40,30 @@ class MainActivity : AppCompatActivity() {
         })
         recyclerView.adapter=adapter
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+
+        // Action Bar ajustes
+        supportActionBar?.setTitle("Signos del Zoodiaco")
+        supportActionBar?.setDis
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.activity_main, menu)
+
+        var searchView = menu.findItem(R.id.menu_search).actionView as SearchView
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextChange(newText: String?): Boolean {
+                Log.i("ZODIAC", "Escribiendo: $newText")
+                return true
+            }
+
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                Log.i("ZODIAC", "Buscando: $query")
+                return true
+            }
+
+        })
+
+        return true
     }
 }
