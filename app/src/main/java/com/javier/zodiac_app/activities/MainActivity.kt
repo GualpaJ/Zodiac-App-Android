@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
         // Action Bar ajustes
-        supportActionBar?.setTitle("Signos del Zoodiaco")
+        supportActionBar?.setTitle("Signos del Zodiaco")
 
     }
 
