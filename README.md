@@ -33,15 +33,20 @@ Aplicación nativa de Android desarrollada en Kotlin que muestra información so
 
 ## 📷 Capturas de pantalla
 
-<img src="list.png" width="300"/>
+## 📷 Capturas de pantalla
 
-*Pantalla principal con el RecyclerView mostrando los signos del zodiaco.*
+<p align="center">
+  <img src="list.png" width="250">
+  <img src="detail.png" width="250">
+</p>
 
-<br/>
+<p align="center">
+  <sub>Pantalla principal con el RecyclerView mostrando los signos del zodiaco</sub>
+</p>
 
-<img src="detail.png" width="300"/>
-
-*Pantalla de detalle con la información del horóscopo seleccionado.*
+<p align="center">
+  <sub>Pantalla de detalle con la información del horóscopo seleccionado</sub>
+</p>
 
 ---
 
