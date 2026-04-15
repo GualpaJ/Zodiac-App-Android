@@ -1,4 +1,4 @@
-package com.javier.zodiac_app
+package com.javier.zodiac_app.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,7 +11,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-
+import com.javier.zodiac_app.data.Horoscope
+import com.javier.zodiac_app.R
 
 class DetailActivity : AppCompatActivity() {
 
@@ -31,7 +32,7 @@ class DetailActivity : AppCompatActivity() {
         //acceso al id de horoscopo en detalle (usar !! es para decirle que si o si paso el id)
         val id = intent.getStringExtra("HOROSCOPE_ID")!!
 
-        val horoscope = Horoscope.getById(id)!!
+        val horoscope = Horoscope.Companion.getById(id)!!
         Log.i("ZODIAC", "${getString(horoscope.name)} -> ${getString(horoscope.dates)}")
 
         // Conectamos con XML

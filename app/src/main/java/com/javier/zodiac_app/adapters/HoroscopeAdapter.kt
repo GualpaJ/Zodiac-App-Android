@@ -1,4 +1,4 @@
-package com.javier.zodiac_app
+package com.javier.zodiac_app.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.javier.zodiac_app.R
+import com.javier.zodiac_app.data.Horoscope
 
 class HoroscopeAdapter (var items: List<Horoscope>, val onItemClick: (Int)-> Unit) : RecyclerView.Adapter<HoroscopeViewHolder>() {
     // Cual es la vista para los elementos

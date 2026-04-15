@@ -1,4 +1,4 @@
-package com.javier.zodiac_app
+package com.javier.zodiac_app.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,11 +11,13 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-
+import com.javier.zodiac_app.data.Horoscope
+import com.javier.zodiac_app.adapters.HoroscopeAdapter
+import com.javier.zodiac_app.R
 
 class MainActivity : AppCompatActivity() {
 
-    var horoscopeList: List<Horoscope> = Horoscope.horoscopeList
+    var horoscopeList: List<Horoscope> = Horoscope.Companion.horoscopeList
     lateinit var recyclerView: RecyclerView
     lateinit var adapter: HoroscopeAdapter
 
@@ -54,7 +56,7 @@ class MainActivity : AppCompatActivity() {
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextChange(newText: String): Boolean {
-                horoscopeList = Horoscope.horoscopeList.filter{
+                horoscopeList = Horoscope.Companion.horoscopeList.filter{
                     getString(it.name).contains(newText, true)
                             ||getString(it.dates).contains(newText,true)
                 }
