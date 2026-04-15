@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity() {
 
     var horoscopeList: List<Horoscope> = Horoscope.horoscopeList
     lateinit var recyclerView: RecyclerView
+    lateinit var adapter: HoroscopeAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         }
         recyclerView = findViewById(R.id.recyclerView)
 
-        val adapter = HoroscopeAdapter(horoscopeList, { position ->
+        adapter = HoroscopeAdapter(horoscopeList, { position ->
             val horoscope = horoscopeList[position]
 //            Log.i("ZODIAC", "He pulsado en: ${getString(horoscope.name)}")
             // Navegar a otra ventana para mostrar mas detalles
@@ -43,7 +44,7 @@ class MainActivity : AppCompatActivity() {
 
         // Action Bar ajustes
         supportActionBar?.setTitle("Signos del Zoodiaco")
-        supportActionBar?.setDis
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -52,8 +53,12 @@ class MainActivity : AppCompatActivity() {
         var searchView = menu.findItem(R.id.menu_search).actionView as SearchView
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextChange(newText: String?): Boolean {
-                Log.i("ZODIAC", "Escribiendo: $newText")
+            override fun onQueryTextChange(newText: String): Boolean {
+                horoscopeList = Horoscope.horoscopeList.filter{
+                    getString(it.name).contains(newText, true)
+                            ||getString(it.dates).contains(newText,true)
+                }
+                adapter.updateData(horoscopeList)
                 return true
             }
 
