@@ -50,6 +50,13 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    // Llamamos ONRESUME para el ciclo de activity
+    override fun onResume(){
+        super.onResume()
+
+        adapter.updateData(horoscopeList)
+    }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.activity_main, menu)
 

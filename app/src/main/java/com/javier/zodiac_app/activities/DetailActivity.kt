@@ -13,12 +13,20 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.javier.zodiac_app.data.Horoscope
 import com.javier.zodiac_app.R
+import com.javier.zodiac_app.utils.SesionManager
 
 class DetailActivity : AppCompatActivity() {
 
+    lateinit var horoscope: Horoscope
     lateinit var nameTextView: TextView
     lateinit var imageView: ImageView
     lateinit var descTextView: TextView
+
+    lateinit var favoriteMenuItem : MenuItem
+
+    lateinit var session : SesionManager
+
+    var isFavorite: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,11 +37,15 @@ class DetailActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        session = SesionManager(this)
+
         //acceso al id de horoscopo en detalle (usar !! es para decirle que si o si paso el id)
         val id = intent.getStringExtra("HOROSCOPE_ID")!!
 
-        val horoscope = Horoscope.Companion.getById(id)!!
+        horoscope = Horoscope.Companion.getById(id)!!
         Log.i("ZODIAC", "${getString(horoscope.name)} -> ${getString(horoscope.dates)}")
+
+        isFavorite = session.isFavoriteHoroscope(id)
 
         // Conectamos con XML
         nameTextView = findViewById(R.id.nameTextView)
@@ -53,6 +65,8 @@ class DetailActivity : AppCompatActivity() {
     // decimos cual es el menu bar que queremos cargar en el action bar
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.activity_detail, menu)
+        favoriteMenuItem = menu.findItem(R.id.menu_favorite)
+        setFavoriteIcon()
         return true
     }
 
@@ -67,7 +81,7 @@ class DetailActivity : AppCompatActivity() {
             }
             R.id.menu_favorite -> {
                 // Marcar el horoscopo como favorito
-                Log.i("ZODIAC", "Menu favorite")
+                setFavorite()
                 true
             }
             R.id.menu_share -> {
@@ -78,6 +92,25 @@ class DetailActivity : AppCompatActivity() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    fun setFavoriteIcon(){
+        if(isFavorite){
+            favoriteMenuItem.setIcon(R.drawable.ic_favorite_selected)
+        }else {
+            favoriteMenuItem.setIcon(R.drawable.ic_favorite)
+        }
+    }
+    // CAMBIA EL VALOR QUE HAY EN SESION
+    fun setFavorite(){
+        if(isFavorite){
+            session.setFavoriteHoroscope("")
+        }else{
+            session.setFavoriteHoroscope(horoscope.id)
+        }
+        //interruptor para cambiar el valor
+        isFavorite =!isFavorite
+        setFavoriteIcon()
     }
 
     fun share(){

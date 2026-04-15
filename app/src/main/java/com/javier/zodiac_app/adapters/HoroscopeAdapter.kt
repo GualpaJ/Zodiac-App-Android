@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.javier.zodiac_app.R
 import com.javier.zodiac_app.data.Horoscope
+import com.javier.zodiac_app.utils.SesionManager
 
 class HoroscopeAdapter (var items: List<Horoscope>, val onItemClick: (Int)-> Unit) : RecyclerView.Adapter<HoroscopeViewHolder>() {
     // Cual es la vista para los elementos
@@ -38,14 +39,24 @@ class HoroscopeAdapter (var items: List<Horoscope>, val onItemClick: (Int)-> Uni
 }
 
 
-class HoroscopeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    val signImagesView: ImageView =itemView.findViewById(R.id.singImageView)
-    val nameTextView: TextView = itemView.findViewById(R.id.nameTextView)
-    val datesTextView: TextView = itemView.findViewById(R.id.datesTextView)
+class HoroscopeViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    val signImagesView: ImageView =view.findViewById(R.id.singImageView)
+    val nameTextView: TextView = view.findViewById(R.id.nameTextView)
+    val datesTextView: TextView = view.findViewById(R.id.datesTextView)
+
+    val favoriteImagesView: ImageView =view.findViewById(R.id.favoriteImageView)
 
     fun render(horoscope: Horoscope){
         nameTextView.setText(horoscope.name)
         datesTextView.setText(horoscope.dates)
         signImagesView.setImageResource(horoscope.image)
+        //usamos una vista para el contexto , usamos el itemview porque es constante en el tiempo
+        if(SesionManager(itemView.context).isFavoriteHoroscope(horoscope.id)){
+            favoriteImagesView.visibility = View.VISIBLE
+            // otra manera: favoriteImagesView.isVisible = true
+        }else{
+            favoriteImagesView.visibility = View.GONE
+            // otra manera: favoriteImagesView.isVisible = false (esto lo pone gone)
+        }
     }
 }
