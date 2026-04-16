@@ -3,6 +3,19 @@
 
     <string name="app_name">Zodiac_App</string>
 
+    <string name="horoscope_name_aries">Aries</string>
+    <string name="horoscope_name_taurus">Tauro</string>
+    <string name="horoscope_name_gemini">Géminis</string>
+    <string name="horoscope_name_cancer">Cáncer</string>
+    <string name="horoscope_name_leo">Leo</string>
+    <string name="horoscope_name_virgo">Virgo</string>
+    <string name="horoscope_name_libra">Libra</string>
+    <string name="horoscope_name_scorpio">Escorpio</string>
+    <string name="horoscope_name_sagittarius">Sagitario</string>
+    <string name="horoscope_name_capricorn">Capricornio</string>
+    <string name="horoscope_name_aquarius">Acuario</string>
+    <string name="horoscope_name_pisces">Piscis</string>
+
     <string name="horoscope_date_aries">21 de marzo al 19 de abril</string>
     <string name="horoscope_date_taurus">20 de abril al 20 de mayo</string>
     <string name="horoscope_date_gemini">21 de mayo al 20 de junio</string>

@@ -1,0 +1,90 @@
+package com.javier.zodiac_app.activities
+
+import android.content.Intent
+import android.os.Bundle
+import android.util.Log
+import android.view.Menu
+import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.javier.zodiac_app.data.Horoscope
+import com.javier.zodiac_app.adapters.HoroscopeAdapter
+import com.javier.zodiac_app.R
+import com.javier.zodiac_app.utils.search
+
+class MainActivity : AppCompatActivity() {
+
+    var horoscopeList: List<Horoscope> = Horoscope.Companion.horoscopeList
+    lateinit var recyclerView: RecyclerView
+    lateinit var adapter: HoroscopeAdapter
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContentView(R.layout.activity_main)
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
+        recyclerView = findViewById(R.id.recyclerView)
+
+        adapter = HoroscopeAdapter(horoscopeList, { position ->
+            val horoscope = horoscopeList[position]
+//            Log.i("ZODIAC", "He pulsado en: ${getString(horoscope.name)}")
+            // Navegar a otra ventana para mostrar mas detalles
+            val intent = Intent(this, DetailActivity::class.java)
+            // Usamos un parametro para localizar el horoscopo determinado
+            intent.putExtra("HOROSCOPE_ID", horoscope.id)
+            startActivity(intent)
+        })
+        recyclerView.adapter=adapter
+        recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+
+        // Action Bar ajustes
+        supportActionBar?.setTitle("Signos del Zodiaco")
+
+    }
+
+    // Llamamos ONRESUME para el ciclo de activity
+    override fun onResume(){
+        super.onResume()
+
+        adapter.updateData(horoscopeList)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.activity_main, menu)
+
+        var searchView = menu.findItem(R.id.menu_search).actionView as SearchView
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextChange(newText: String): Boolean {
+                // Esto no tiene en cuenta los acentos de las palabras para ello implementamos .search()
+//                horoscopeList = Horoscope.Companion.horoscopeList.filter{
+//                    getString(it.name).contains(newText, true)
+//                            ||getString(it.dates).contains(newText,true)
+//                }
+
+                horoscopeList = Horoscope.Companion.horoscopeList.filter{
+                    getString(it.name).search(newText)
+                            ||getString(it.dates).search(newText)
+                }
+                adapter.updateData(horoscopeList)
+                return true
+            }
+
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                Log.i("ZODIAC", "Buscando: $query")
+                return true
+            }
+
+        })
+
+        return true
+    }
+}
