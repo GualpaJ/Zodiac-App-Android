@@ -1,31 +1,23 @@
-# 🌌 Zodiac App – Android Kotlin
+# 🌌 Zodiac App – Android Kotlin (v1.0)
 
 **Descripción:**  
-Aplicación nativa de Android desarrollada en Kotlin que muestra información sobre los signos del zodiaco. La app presenta una lista de horóscopos mediante un **RecyclerView** y permite navegar a una pantalla de detalle con nombre, imagen y descripción.
-
-En su versión **v2.0**, se han añadido mejoras de interacción como búsqueda, sistema de favoritos y opciones de compartir.
+Aplicación nativa de Android desarrollada en Kotlin como proyecto inicial para aprender fundamentos de desarrollo Android.  
+Esta primera versión se centra en la visualización de datos mediante un **RecyclerView** y la navegación entre pantallas.
 
 ---
 
 ## 📌 Funcionalidades
 
 ### 🔹 v1.0
-- Lista de signos del zodiaco usando **RecyclerView**  
-- Navegación a pantalla de detalle al hacer click  
-- Envío de datos entre Activities mediante `Intent`  
-- Pantalla de detalle con:
-  - Nombre  
-  - Imagen  
+- 📋 Lista de signos del zodiaco usando **RecyclerView**  
+- 🔍 Navegación a pantalla de detalle al hacer click en un elemento  
+- 📦 Envío de datos entre Activities mediante `Intent`  
+- 📱 Pantalla de detalle con:
+  - Nombre del signo  
+  - Imagen representativa  
   - Descripción  
-- Uso de recursos (`strings.xml`, `drawables`)  
-- Modelo de datos `Horoscope`  
-
-### 🔹 v2.0
-- 🔍 Búsqueda de signos con **SearchView**  
-- ❤️ Sistema de favoritos con persistencia (**SharedPreferences**)  
-- ⭐ Indicador visual de favoritos en la lista  
-- 🔗 Opción de compartir contenido (Intent ACTION_SEND)  
-- 📱 Action Bar con acciones (favorito + compartir)  
+- 🧩 Uso de recursos de Android (`strings.xml`, `drawables`)  
+- 🏗 Modelo de datos simple `Horoscope`  
 
 ---
 
@@ -34,11 +26,10 @@ En su versión **v2.0**, se han añadido mejoras de interacción como búsqueda,
 - Kotlin  
 - Android Studio  
 - RecyclerView  
-- Intents (Activity Navigation)  
-- SharedPreferences  
-- SearchView  
+- Intents (Navigation entre Activities)  
 - Material Design Components  
 - ConstraintLayout  
+- Recursos Android (`strings.xml`, `drawables`)  
 
 ---
 
@@ -50,23 +41,16 @@ En su versión **v2.0**, se han añadido mejoras de interacción como búsqueda,
   <img src="detail.png" width="250">
 </p>
 
-### 🔵 v2.0
-<p align="center">
-  <img src="list2.png" width="250">
-  <img src="detail2.png" width="250">
-</p>
-
 ---
 
 ## 📝 Lo que aprendí
 
-- Uso de RecyclerView y Adapters  
+- Creación de interfaces con RecyclerView  
+- Uso de Adapters y ViewHolder  
 - Navegación entre Activities con Intents  
-- Paso de datos entre pantallas  
-- Gestión de estado con **SharedPreferences**  
-- Implementación de **SearchView** para filtrado  
-- Manejo del **Action Bar y menús**  
-- Mejora de UX con favoritos y compartir  
+- Paso básico de datos entre pantallas  
+- Uso de recursos en Android  
+- Estructura básica de una app Android nativa  
 
 ---
 
