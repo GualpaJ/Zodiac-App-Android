@@ -104,9 +104,9 @@ class DetailActivity : AppCompatActivity() {
     // CAMBIA EL VALOR QUE HAY EN SESION
     fun setFavorite(){
         if(isFavorite){
-            session.setFavoriteHoroscope("")
+            session.removeFavorite(horoscope.id)
         }else{
-            session.setFavoriteHoroscope(horoscope.id)
+            session.addFavorite(horoscope.id)
         }
         //interruptor para cambiar el valor
         isFavorite =!isFavorite
