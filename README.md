@@ -33,8 +33,6 @@ Aplicación nativa de Android desarrollada en Kotlin que muestra información so
 
 ## 📷 Capturas de pantalla
 
-## 📷 Capturas de pantalla
-
 <p align="center">
   <img src="list.png" width="250">
   <img src="detail.png" width="250">
