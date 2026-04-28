@@ -59,4 +59,4 @@ Esta primera versión se centra en la visualización de datos mediante un **Recy
 1. Clona el repositorio:
 
 ```bash
-git clone https://github.com/tuusuario/zodiac_app.git
+git clone https://github.com/GualpaJ/Zodiac-App-Android.git
