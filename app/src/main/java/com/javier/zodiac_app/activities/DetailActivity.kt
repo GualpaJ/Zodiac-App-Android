@@ -113,13 +113,29 @@ class DetailActivity : AppCompatActivity() {
         setFavoriteIcon()
     }
 
-    fun share(){
-        val sendIntent = Intent()
-        sendIntent.setAction(Intent.ACTION_SEND)
-        sendIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send.")
-        sendIntent.setType("text/plain")
+    fun share() {
+        val name = getString(horoscope.name)
+        val dates = getString(horoscope.dates)
+        val desc = getString(horoscope.desc)
 
-        val shareIntent = Intent.createChooser(sendIntent, null)
-        startActivity(shareIntent)
+        val shareText = """
+        ⭐ Discover your horoscope! ⭐
+        
+        ✨ ${name.uppercase()} ✨
+        📅 $dates
+        
+        📖 ${desc.take(200)}...
+        
+        ━━━━━━━━━━━━━━━━━━━━━━━
+        Shared from Zodiac App
+    """.trimIndent()
+
+        val sendIntent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, shareText)
+            type = "text/plain"
+        }
+
+        startActivity(Intent.createChooser(sendIntent, "Share horoscope"))
     }
 }
